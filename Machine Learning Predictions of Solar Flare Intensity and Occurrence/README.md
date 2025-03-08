@@ -1,0 +1,4 @@
+This project aimed to improve the prediction of solar flares, which are critical for mitigating the adverse effects on Earth's technological systems. Contrastive self-supervised learning model using convolutional neural networks (CNNs) is employed. The model learns to pull together similar pairs of data points and push apart dissimilar pairs, effectively learning useful data representations without explicit labels.
+
+Results:
+The self-supervised model effectively classified X-class solar flares, which have the most significant impact on Earth. However, the True Skill Statistics (TSS) score was 0.291, which is relatively low. This low score might be attributed to the similarity in satellite images from the Solar Dynamics Observatory (SDO) between C-class and M-class flares, making it challenging to distinguish between these classes.
