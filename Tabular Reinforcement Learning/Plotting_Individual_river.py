@@ -1,0 +1,60 @@
+import numpy as np 
+import matplotlib.pyplot as plt
+
+Q_learning = np.load('Q_learning_data_river.npy')
+double_Q_learning = np.load('Double_Q_learning_data_river.npy')
+expected_sarsa = np.load('Expected_Sarsa_data_river.npy')
+sarsa = np.load('Sarsa_data_river.npy')
+
+Q_learning = np.reshape(Q_learning, (5, int(len(Q_learning[0]) / 100), 100))
+Q_learning = np.mean(Q_learning, axis=2)
+Q_learning_std = np.std(Q_learning, axis=0)
+Q_learning = np.mean(Q_learning, axis=0)
+
+double_Q_learning = np.reshape(double_Q_learning, (5, int(len(double_Q_learning[0]) / 100), 100))
+double_Q_learning = np.mean(double_Q_learning, axis=2)
+double_Q_learning_std = np.std(double_Q_learning, axis=0)
+double_Q_learning = np.mean(double_Q_learning, axis=0)
+
+expected_sarsa = np.reshape(expected_sarsa, (5, int(len(expected_sarsa[0]) / 100), 100))
+expected_sarsa = np.mean(expected_sarsa, axis=2)
+expected_sarsa_std = np.std(expected_sarsa, axis=0)
+expected_sarsa = np.mean(expected_sarsa, axis=0)
+
+sarsa = np.reshape(sarsa, (5, int(len(sarsa[0]) / 100), 100))
+sarsa = np.mean(sarsa, axis=2)
+sarsa_std = np.std(sarsa, axis=0)
+sarsa = np.mean(sarsa, axis=0)
+
+plt.figure()
+plt.xlabel('Epochs')
+plt.ylabel('Average Score over 100 Epochs')
+plt.plot(Q_learning, color='purple', label='Q-learning')
+plt.fill_between(range(len(Q_learning)), Q_learning - 2 * Q_learning_std, Q_learning + 2 * Q_learning_std, color='purple', alpha=0.2)
+plt.title('Q-learning on River Swim')
+plt.savefig('Q-learning on River Swim')
+
+plt.figure()
+plt.xlabel('Epochs')
+plt.ylabel('Average Score over 100 Epochs')
+plt.plot(double_Q_learning, color='blue', label='Double Q-learning')
+plt.fill_between(range(len(double_Q_learning)), double_Q_learning - 2 * double_Q_learning_std, double_Q_learning + 2 * double_Q_learning_std, color='blue', alpha=0.2)
+plt.title('Double Q-learning on River Swim')
+plt.savefig('Double Q-learning on River Swim')
+
+plt.figure()
+plt.xlabel('Epochs')
+plt.ylabel('Average Score over 100 Epochs')
+plt.plot(expected_sarsa, color='red', label='Expected Sarsa')
+plt.fill_between(range(len(expected_sarsa)), expected_sarsa - 2 * expected_sarsa_std, expected_sarsa + 2 * expected_sarsa_std, color='red', alpha=0.2)
+plt.title('Expected Sarsa on River Swim')
+plt.savefig('Expected Sarsa on River Swim')
+
+plt.figure()
+plt.xlabel('Epochs')
+plt.ylabel('Average Score over 100 Epochs')
+plt.plot(sarsa, color='green', label='Sarsa')
+plt.fill_between(range(len(sarsa)), sarsa - 2 * sarsa_std, sarsa + 2 * sarsa_std, color='green', alpha=0.2)
+plt.title('Sarsa on River Swim')
+plt.savefig('Sarsa on River Swim')
+plt.legend()
